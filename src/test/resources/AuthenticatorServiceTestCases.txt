@@ -1,0 +1,9 @@
+CheckEmailWithRecords
+	Check good email
+	Check bad email
+CheckPasswordWithRecords
+	Check good 	Password with 	good email
+	Check bad 	Password with 	good email
+userValidation
+	Check good email with nastylistofstrings for password
+	Check nastylistofstrings for email

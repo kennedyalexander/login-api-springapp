@@ -66,7 +66,7 @@ public class ProjectController {
 		return user;
 	}
 	/**
-	 * Updates username with incoming variables.
+	 * Updates user with incoming variables.
 	 * If new user creates new user.
 	 * @param username
 	 * @param email

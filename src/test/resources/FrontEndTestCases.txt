@@ -1,0 +1,45 @@
+My test cases to be written.
+
+Testing of front end functionality user tests
+Login
+	logon good email, good password
+	Logon good email, missing password
+	Logon good eamil, bad password
+	logon bad email, missing password
+	logon bad email, goood password
+	logon bad email, bad password
+		
+Create
+	create new email 		good data
+	create new email 		bad data
+	create existing email	good data
+	create existing email	bad data
+	create bad email  		good data
+	create bad email  		bad data
+	
+Read
+	read existing email		good pass
+	read existing email		bad pass
+	read bad email			good pass
+	read bad email			bad pass
+	read unexisting email	good pass
+	read unexisting email	bad pass
+	
+
+Update
+	update existing email 	good data
+	update existing email 	bad data
+	update unexisting email good data
+	update unexisting email bad data
+	update bad email		good data
+	update bad email		bad data
+	
+Delete
+	delete existing email	good data
+	delete existing email	bad data
+	delete bad email		good data
+	
+
+Random Url
+
+Random Url with JSON
