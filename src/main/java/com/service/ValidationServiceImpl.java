@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 /**
- * validates all of the given inputs and retuns if they are valid in true or false.
+ * Validates all of the given inputs and returns if they are valid in true or false.
  * @author alexander
  *
  */

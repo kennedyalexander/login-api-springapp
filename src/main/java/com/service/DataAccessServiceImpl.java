@@ -1,5 +1,6 @@
 package com.service;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,6 @@ public class DataAccessServiceImpl implements DataAccessService {
 				validationServiceImpl.isValidEmail(user.getEmail()) &&
 				validationServiceImpl.isValidPassword(user.getPassword()) &&
 				validationServiceImpl.isValidActive(user.getActive())){
-			User newUser = user;
 		}
 	 	userDaoImpl.addUser(user);
 	}
@@ -34,35 +34,41 @@ public class DataAccessServiceImpl implements DataAccessService {
 	}
 
 	public String updateUser(User user) {
-		User oldUser = userDaoImpl.getUserForEmail(user.getUsername());
+		User oldUser = userDaoImpl.getUserForEmail(user.getEmail());
 		User updatingUser = oldUser; //make updating equal to old
 		if(oldUser.getEmail().equals("")){ //if not exists then create
 			userDaoImpl.addUser(user);		
-			return "added new User";
+			return "Added as new User";
 		} else{
 			if (isDifferent(oldUser.getUsername(), user.getUsername())){
 				if(validationServiceImpl.isValidUsername(user.getUsername())){
 				updatingUser.setUsername(user.getUsername());
 				} else{
-					return "invalid username";
+					return "Invalid username";
 				}
 			}
-			if (isDifferent(oldUser.getPassword(), user.getPassword())){
+			String hashedPassword = "";
+			try {
+				hashedPassword = validationServiceImpl.phraseHasher(user.getPassword());
+			} catch (NoSuchAlgorithmException e) {
+			}
+			//Check old password vs new password hashed
+			if (isDifferent(oldUser.getPassword(), hashedPassword)){
 				if(validationServiceImpl.isValidPassword(user.getPassword())){
 				updatingUser.setPassword(user.getPassword());
 				} else{
-					return "invalid Password";
+					return "Invalid Password";
 				}
 			}
 			if (isDifferent(oldUser.getActive(), user.getActive())){
 				if(validationServiceImpl.isValidActive(user.getActive())){
 				updatingUser.setActive(user.getActive());
 			} else{
-				return "invalid Active";
+				return "Invalid Active";
 			}
 			}
 			userDaoImpl.updateUser(updatingUser);
-			return "updated User";
+			return "Updated User";
 		}
 		
 
