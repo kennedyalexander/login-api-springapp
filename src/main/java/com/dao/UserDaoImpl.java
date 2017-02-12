@@ -26,11 +26,11 @@ public class UserDaoImpl implements UserDao {
 	@Autowired ValidationServiceImpl validationServiceImpl;
 
 	/**
-	 * Everytime you pass a username it get converted to lowercase.
+	 * Everytime you pass a emailaddresss it get converted to lowercase.
 	 */
-	public User getUserForUserName(String username) {
-		username = username.toLowerCase();
-		String statement = String.format("SELECT * FROM USERS WHERE USER_USERNAME = '%s'", username);
+	public User getUserForEmail(String email) {
+		email = email.toLowerCase();
+		String statement = String.format("SELECT * FROM USERS WHERE USER_EMAIL = '%s'", email);
 		List<User> users = h2JdbcTemplate.query(statement, new RowMapper<User>() {
 			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 				User user = new User();
@@ -70,9 +70,9 @@ public class UserDaoImpl implements UserDao {
 		return users;
 	}
 	
-	public String getPasswordForUserName(String username) {
-		username = username.toLowerCase();
-		String statement = String.format("SELECT USER_PASSWORD FROM USERS WHERE USER_USERNAME = '%s'", username);
+	public String getPasswordForEmail(String email) {
+		email = email.toLowerCase();
+		String statement = String.format("SELECT USER_PASSWORD FROM USERS WHERE USER_EMAIL = '%s'", email);
 		List<User> users = h2JdbcTemplate.query(statement, new RowMapper<User>() {
 			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 				User user = new User();
@@ -87,14 +87,14 @@ public class UserDaoImpl implements UserDao {
 			addUser(user);
 	}
 
-	public void deleteUser(String username) {
-		username = username.toLowerCase();
-		String statement = String.format("DELETE FROM USERS WHERE USER_USERNAME = '%s'", username);
+	public void deleteUser(String email) {
+		email = email.toLowerCase();
+		String statement = String.format("DELETE FROM USERS WHERE USER_EMAIL = '%s'", email);
 		h2JdbcTemplate.update(statement);
 	}
 
 	public void addUser(User user) {
-		if (getUserForUserName(user.getUsername()).getUsername().equals("")){
+		if (getUserForEmail(user.getEmail()).getEmail().equals("")){
 		try {
 			String statement = "";
 			statement = String.format("INSERT INTO USERS VALUES ('%s', '%s', '%s', %d)", user.getUsername().toLowerCase(),

@@ -8,9 +8,9 @@ import com.web.controller.User;
 
 public interface UserDao {
 	
-	User getUserForUserName(String UserName);
+	User getUserForEmail(String UserName);
 	List<User> getAllUsers();
-	String getPasswordForUserName(String UserName);
+	String getPasswordForEmail(String UserName);
 	void updateUser(User user);
 	void deleteUser(String user);
 	void addUser(User user) throws NoSuchAlgorithmException;

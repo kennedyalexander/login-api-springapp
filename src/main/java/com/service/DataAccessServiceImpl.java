@@ -25,26 +25,26 @@ public class DataAccessServiceImpl implements DataAccessService {
 	 	userDaoImpl.addUser(user);
 	}
 
-	public User getByName(String username) {
-		return 	userDaoImpl.getUserForUserName(username);
+	public User getByEmail(String email) {
+		return 	userDaoImpl.getUserForEmail(email);
 	}
 
 	public User getById(String id) {
-		return 	userDaoImpl.getUserForUserName(id);
+		return 	userDaoImpl.getUserForEmail(id);
 	}
 
 	public String updateUser(User user) {
-		User oldUser = userDaoImpl.getUserForUserName(user.getUsername());
+		User oldUser = userDaoImpl.getUserForEmail(user.getUsername());
 		User updatingUser = oldUser; //make updating equal to old
-		if(oldUser.getUsername().equals("")){ //if not exists then create
+		if(oldUser.getEmail().equals("")){ //if not exists then create
 			userDaoImpl.addUser(user);		
 			return "added new User";
 		} else{
-			if (isDifferent(oldUser.getEmail(), user.getEmail())){
-				if(validationServiceImpl.isValidEmail(user.getEmail())){
-				updatingUser.setEmail(user.getEmail());
+			if (isDifferent(oldUser.getUsername(), user.getUsername())){
+				if(validationServiceImpl.isValidUsername(user.getUsername())){
+				updatingUser.setUsername(user.getUsername());
 				} else{
-					return "invalid Email";
+					return "invalid username";
 				}
 			}
 			if (isDifferent(oldUser.getPassword(), user.getPassword())){
@@ -76,8 +76,8 @@ public class DataAccessServiceImpl implements DataAccessService {
 		return userDaoImpl.getAllUsers();
 	}
 
-	public String getPasswordForUsername(String username) {
-		return userDaoImpl.getPasswordForUserName(username);
+	public String getPasswordForEmail(String email) {
+		return userDaoImpl.getPasswordForEmail(email);
 	}
 	
 	private Boolean isDifferent(Object string1, Object string2){

@@ -7,10 +7,10 @@ import com.web.controller.User;
 public interface DataAccessService {
 
 	void createUser(User user);
-	User getByName(String username);
+	User getByEmail(String email);
 	User getById(String id);
 	String updateUser(User user);
-	void deleteUser(String username);
+	void deleteUser(String email);
 	List<User> getAllUsers();
-	String getPasswordForUsername(String username);
+	String getPasswordForEmail(String email);
 }

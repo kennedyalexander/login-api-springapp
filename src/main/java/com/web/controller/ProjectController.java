@@ -60,7 +60,7 @@ public class ProjectController {
 		User user = new User();
 		Boolean valid = authenticatorServiceImpl.userValidation(loginRequest);
 		if (valid){ 
-			return dataAccessServiceImpl.getByName(loginRequest.username);
+			return dataAccessServiceImpl.getByEmail(loginRequest.email);
 		}
 		//Returns json Object
 		return user;
@@ -87,7 +87,7 @@ public class ProjectController {
 		//delete
 		Boolean valid = authenticatorServiceImpl.userValidation(loginRequest);
 		if (valid){ 
-			dataAccessServiceImpl.deleteUser(loginRequest.username);
+			dataAccessServiceImpl.deleteUser(loginRequest.email);
 			return "Deleted user";
 		}
 		return "Not Deleted user";

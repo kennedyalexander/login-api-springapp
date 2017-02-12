@@ -30,16 +30,16 @@ public class AuthenticatorServiceImpl implements AuthenticatorService {
 		try {
 			//Checking the username is valid
 			//no need to check the pass as we compare against the hash.
-			if (!validationServiceImpl.isValidUsername(loginRequest.getUsername())) {
+			if (!validationServiceImpl.isValidEmail(loginRequest.getEmail())) {
 				return false;
 			}
 			//convert username to lowercase
-			parsedRequest.setUsername(loginRequest.getUsername().toLowerCase());
+			parsedRequest.setEmail(loginRequest.getEmail().toLowerCase());
 			parsedRequest.setPassword(validationServiceImpl.phraseHasher(loginRequest.getPassword()));
 
 			// If valid username false
 			// If valid password false
-			if (!checkUsernameWithRecords(parsedRequest.getUsername()) && !checkPasswordWithRecords(parsedRequest)) {
+			if (!checkEmailWithRecords(parsedRequest.getEmail()) && !checkPasswordWithRecords(parsedRequest)) {
 				return false;
 			}
 		} catch (Exception e) {
@@ -49,9 +49,9 @@ public class AuthenticatorServiceImpl implements AuthenticatorService {
 		return true;
 	}
 
-	private Boolean checkUsernameWithRecords(String loginRequest) {
+	private Boolean checkEmailWithRecords(String loginRequest) {
 		// We return empty objects from the db to avoid nullpointers so this is why we do this.
-		if (dataAccessServiceImpl.getByName(loginRequest).getUsername().equals("")) {
+		if (dataAccessServiceImpl.getByEmail(loginRequest).getEmail().equals("")) {
 			return false;
 		}
 		// exists check
@@ -61,7 +61,7 @@ public class AuthenticatorServiceImpl implements AuthenticatorService {
 
 	private Boolean checkPasswordWithRecords(LoginRequest loginRequest) {
 		// get password if equals password from db, only compair hashes.
-		if (dataAccessServiceImpl.getPasswordForUsername(loginRequest.getUsername())
+		if (dataAccessServiceImpl.getPasswordForEmail(loginRequest.getEmail())
 				.equals(loginRequest.getPassword())) {
 			return true;
 		}

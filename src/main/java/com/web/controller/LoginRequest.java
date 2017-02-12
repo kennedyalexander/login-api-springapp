@@ -4,41 +4,44 @@ import java.io.Serializable;
 
 public class LoginRequest implements Serializable {
 	
-	String username;
+	String email;
 	String password;
 	
 	public LoginRequest(){
 	}
 	
-	public LoginRequest(String username,  String password){
-		this.username = username;
+	public LoginRequest(String email,  String password){
+		this.email = email;
 		this.password = password;
 	}
-	
+
 	/**
-	 * @return the username
+	 * @return the email
 	 */
-	public String getUsername() {
-		return username;
+	public String getEmail() {
+		return email;
 	}
+
 	/**
 	 * @return the password
 	 */
 	public String getPassword() {
 		return password;
 	}
+
 	/**
-	 * @param username the username to set
+	 * @param email the email to set
 	 */
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
+
 	/**
 	 * @param password the password to set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
 
 }
