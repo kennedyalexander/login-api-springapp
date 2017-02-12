@@ -72,6 +72,12 @@
 			<version>${jstl.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
 		<!-- compile only, deployed container will provide this -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -79,7 +85,7 @@
 			<version>${servletapi.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 	</dependencies>
 
 	<build>

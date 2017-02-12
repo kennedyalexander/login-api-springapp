@@ -34,7 +34,7 @@ public class ProjectController {
 	//in(@RequestBody LoginRequest loginRequest ) {
 	//public String checkLogin(@RequestParam("username") String username, @RequestParam("email") String email) {
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody Boolean checkLogin(@RequestBody final LoginRequest loginRequest) {
 		Boolean valid = authenticatorServiceImpl.userValidation(loginRequest);
 		return valid;
