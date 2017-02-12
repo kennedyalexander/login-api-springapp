@@ -27,7 +27,7 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 @Configuration
 @ComponentScan({ "com" })
-
+@Import({ SecurityWebConfig.class })
 public class WebConfig {
 
 	@Bean(name = "h2Db", destroyMethod = "shutdown")
