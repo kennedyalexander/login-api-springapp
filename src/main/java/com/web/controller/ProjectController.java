@@ -36,8 +36,7 @@ public class ProjectController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody Boolean checkLogin(@RequestBody final LoginRequest loginRequest) {
-		Boolean valid = authenticatorServiceImpl.userValidation(loginRequest);
-		return valid;
+		return authenticatorServiceImpl.userValidation(loginRequest);
 	}
 	/**
 	 * creates user
@@ -46,11 +45,10 @@ public class ProjectController {
 	//  @RequestMapping(method = RequestMethod.POST, value = "personDetails.html")
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, consumes = "application/json")
-	public @ResponseBody String create(@RequestBody final User user) {
+	public @ResponseBody void create(@RequestBody final User user) {
 		//User user = new User(username, email, password, active);
 		//dataAccessServiceImpl.createUser(user);
 		dataAccessServiceImpl.createUser(user);
-		return "inserted";
 		//username=oranges&email='email@email.com'&password=password&active=1
 		
 	}
@@ -64,8 +62,7 @@ public class ProjectController {
 		if (valid){ 
 			return dataAccessServiceImpl.getByName(loginRequest.username);
 		}
-		//check if auth correct
-		//read userback if so
+		//Returns json Object
 		return user;
 	}
 	/**
@@ -91,9 +88,9 @@ public class ProjectController {
 		Boolean valid = authenticatorServiceImpl.userValidation(loginRequest);
 		if (valid){ 
 			dataAccessServiceImpl.deleteUser(loginRequest.username);
-			return "Deleted";
+			return "Deleted user";
 		}
-		return "Not Deleted " + loginRequest.password + " " + loginRequest.username;
+		return "Not Deleted user";
 	}
 }
 
